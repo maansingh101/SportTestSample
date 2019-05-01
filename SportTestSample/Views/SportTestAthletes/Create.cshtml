@@ -1,0 +1,41 @@
+﻿@model SportTestSample.Models.SportTestAthletes
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>SportTestAthletes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <b style="color:red;"> @Html.ValidationSummary()</b>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AthletesFK" class="control-label"></label>
+                <select asp-for="AthletesFK" class="form-control" asp-items="ViewBag.AthletesFK"></select>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="SportsTestFK" class="control-label"></label>
+                <select asp-for="SportsTestFK" class="form-control" asp-items="ViewBag.SportsTestFK"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Distance" class="control-label"></label>
+                <input asp-for="Distance" class="form-control" ></input>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

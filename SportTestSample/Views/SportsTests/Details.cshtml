@@ -1,0 +1,36 @@
+﻿
+@model Tuple<SportsTest, List<SportTestSample.ViewModel.SportTestAthletesViewModel>>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+
+    <table class="table table-responsive table-bordered ">
+        <tr>
+            <td><b>Date</b></td>
+            <td>@Model.Item1.Date.ToString("yyyy-MMM-dd")</td>
+        </tr>
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.Item1.SportsTestType)</b></td>
+            <td>@Html.DisplayFor(model => model.Item1.SportsTestType.TestTypeName)</td>
+        </tr>
+    </table>
+
+
+</div>
+
+
+
+@{
+    @await Html.PartialAsync("~/Views/SportTestAthletes/Index.cshtml", Model)
+
+}
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Item1.EntryID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

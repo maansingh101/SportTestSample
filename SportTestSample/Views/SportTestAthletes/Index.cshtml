@@ -1,0 +1,50 @@
+﻿@model Tuple<SportsTest, List<SportTestSample.ViewModel.SportTestAthletesViewModel>>
+@{
+    ViewData["Title"] = "Index";
+    Int32 SportsTestFK = Model.Item1.EntryID ;
+}
+
+
+
+<p>
+    <a href="/SportTestAthletes/Create?SportsTestFK=@SportsTestFK">Add New Athlete</a>
+</p>
+<table class="table table-responsive table-bordered ">
+    <thead>
+        <tr>
+            <th>
+                Athlete
+            </th>
+            <th>
+                Distance (Meters)
+            </th>
+            <th>
+                Fitness Rating
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item2)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Athlete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FitnessRating)
+            </td>
+            <td>
+                @if (User.IsInRole("Coach") == true)
+                {
+                    <a asp-controller="SportTestAthletes" asp-action="Edit" asp-route-id="@item.EntryId">Edit</a>
+                    <a asp-controller="SportTestAthletes" asp-action="Delete" asp-route-id="@item.EntryId">Delete</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

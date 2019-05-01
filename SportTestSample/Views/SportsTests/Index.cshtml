@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SportTestSample.Models.TestViewModel>
+
+@{
+    ViewData["Title"] = "Sports Test";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Add New Test</a>
+</p>
+<table class="table table-responsive table-bordered ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestType)
+            </th>
+            <th>
+                Number of Participants
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Date.ToString("yyyy-MMM-dd")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Atheletes)
+                </td>
+
+                <td>
+                    @if (User.IsInRole("Coach") == true)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.EntryId">Edit</a>
+                    }
+
+                    | <a asp-action="Details" asp-route-id="@item.EntryId">Details</a> |
+
+                    @if (User.IsInRole("Coach") == true)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.EntryId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
